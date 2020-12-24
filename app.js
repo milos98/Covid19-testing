@@ -13,12 +13,12 @@ mongoose.connect(config.database);
 
 // On Connect
 mongoose.connection.on('connected', () => {
-    console.log('Connected to DB');
+  console.log('Connected to DB');
 });
 
 // On error
 mongoose.connection.on('error', (error) => {
-    console.log('Error connecting to DB: ' +error);
+  console.log('Error connecting to DB: ' + error);
 });
 
 const app = express();
@@ -34,14 +34,20 @@ app.use(cors());
 // Bodyparser Middleware
 app.use(bodyparser.json());
 
+// Passport Middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+require('./config/passport')(passport);
+
 app.use('/users', users);
 
 // Index route
-app.get('/', (req,res) =>{
-    res.send('Invalid endpoint');
+app.get('/', (req, res) => {
+  res.send('Invalid endpoint');
 });
 
 // Sart server
-app.listen(port, () =>{
-    console.log('Server started on port ' +port);
+app.listen(port, () => {
+  console.log('Server started on port ' + port);
 });
