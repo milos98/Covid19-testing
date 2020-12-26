@@ -1,0 +1,22 @@
+$primary-color: #707070;
+$danger-color: #C72F2F;
+$success-color: #2FC785;
+
+.help-block-danger {
+  display: block;
+  box-sizing: border-box;
+  background-color: $danger-color;
+  padding: 0.5em;
+  color: white;
+  text-align: center;
+}
+
+.rounded-corners {
+  border: 1px solid;
+  border-radius: 2em;
+  width: 100%;
+}
+
+input.ng-invalid.ng-touched {
+  border: 1px solid $danger-color;
+}

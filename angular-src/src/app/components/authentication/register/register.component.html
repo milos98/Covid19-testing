@@ -1,0 +1,85 @@
+<div class="container">
+  <h2>Register</h2>
+  <p
+    *ngIf="onSubmit()"
+    class="help-block-danger rounded-corners"
+    >Please enter all info!
+  </p>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="form-group" formGroupName="name">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input
+          class="rounded-corners"
+          type="text"
+          name="fname"
+          id="name"
+          formControlName="firstName"
+        >
+      </div>
+      <div class="form-group">
+        <label for="surname">Surname:</label>
+        <input
+          class="rounded-corners"
+          type="text"
+          name="lname"
+          id="surname"
+          formControlName="lastName"
+        >
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="email">E-mail:</label>
+      <input
+        class="rounded-corners"
+        type="text"
+        name="email"
+        id="email"
+        formControlName="email"
+      >
+    </div>
+    <div class="form-group">
+      <label for="username">Username:</label>
+      <input
+        class="rounded-corners"
+        type="text"
+        name="username"
+        id="username"
+        formControlName="username"
+      >
+    </div>
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input
+        class="rounded-corners"
+        type="password"
+        name="password"
+        id="password"
+        formControlName="password"
+      >
+    </div>
+    <div class="form-group">
+      <label for="gender">Gender:</label>
+      <select
+        class="rounded-corners"
+        type="text"
+        name="gender"
+        id="gender"
+        formControlName="gender"
+      >
+        <option
+          *ngFor="let gender of genders"
+          [value]="gender"
+          >{{gender}}
+        </option>
+      </select>
+      <p>Already have an account? <span class="primary" (click)="goToLogin()">Yuo can login here</span>!</p>
+    </div>
+    <button
+      class="rounded-corners"
+      type="submit"
+      [disabled]="!registerForm.valid"
+    >Register
+    </button>
+  </form>
+</div>

@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+
+  .picture {
+    width: 75vw;
+    margin: 0;
+    background-image: url("../../../assets/COVID19.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+  }
+
+  .router {
+    width: 25vw;
+  }
+}

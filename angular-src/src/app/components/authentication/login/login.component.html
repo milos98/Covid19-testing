@@ -1,0 +1,37 @@
+<div class="container">
+  <h2>Login</h2>
+  <p
+    *ngIf="onSubmit()"
+    class="help-block-danger rounded-corners"
+    >Username and password did not match!
+  </p>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="username">Username:</label>
+      <input
+        class="rounded-corners"
+        type="text"
+        name="username"
+        id="username"
+        formControlName="username"
+      >
+    </div>
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input
+        class="rounded-corners"
+        type="password"
+        name="password"
+        id="password"
+        formControlName="password"
+      >
+      <p>Don't have account? <span class="primary" (click)="goToRegister()">Yuo can create</span> one here for free!</p>
+    </div>
+    <button
+      class="rounded-corners"
+      type="submit"
+      [disabled]="!loginForm.valid"
+    >Login
+    </button>
+  </form>
+</div>

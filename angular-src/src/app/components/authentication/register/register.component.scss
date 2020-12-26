@@ -1,0 +1,47 @@
+@import "../../../../scss/vars";
+
+.container {
+  margin: 2em;
+
+  h2 {
+    margin-bottom: 2em;
+  }
+
+  form {
+    .form-group {
+      display: block;
+      margin-bottom: 1em;
+
+      label {
+        display: block;
+        margin-bottom: 0.5em;
+      }
+
+      p {
+        float: right;
+        font-size: 0.7em;
+        margin-block-start: 0.3em;
+        background-color: transparent;
+
+        span {
+          font-weight: bold;
+          color: $danger-color;
+
+          &:hover {
+            text-decoration: underline;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    button {
+      margin-top: 2em;
+      padding: 0.5em;
+
+      &:disabled {
+        cursor: not-allowed;
+      }
+    }
+  }
+}
