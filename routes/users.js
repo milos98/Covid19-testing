@@ -9,8 +9,8 @@ const Config = require('../config/database');
 router.post('/register', (req, res) => {
   let newUser = new User({
     name: {
-      first: req.body.firstName,
-      last: req.body.lastName,
+      first: req.body.name.firstName,
+      last: req.body.name.lastName,
     },
     email: req.body.email,
     username: req.body.username,
@@ -27,12 +27,30 @@ router.post('/register', (req, res) => {
     },
   });
 
-  User.addUser(newUser, (error, user) => {
-    if (error) {
-      res.json({ success: false, message: 'Registration failed!' });
-    } else {
-      res.json({ success: true, message: 'User registered!' });
+  User.getUserByUsername(newUser.username, (error, user) => {
+    if (error) throw error;
+
+    if (user) {
+      res.json({ success: false, message: 'User with same username already exist!' });
+      return;
     }
+
+    User.getUserByEmail(newUser.email, (error, user) => {
+      if (error) throw error;
+  
+      if (user) {
+        res.json({ success: false, message: 'User with same email already exist!' });
+        return;
+      }
+
+      User.addUser(newUser, (error, user) => {
+        if (error) {
+          res.json({ success: false, message: 'Registration failed!' });
+        } else {
+          res.json({ success: true, message: 'User registered!' });
+        }
+      });
+    });
   });
 });
 
@@ -45,7 +63,7 @@ router.post('/authenticate', (req, res) => {
     if (error) throw error;
 
     if (!user) {
-      return res.json({ success: false, message: 'User not founf!' });
+      return res.json({ success: false, message: 'User not found!' });
     }
 
     User.comparePassword(password, user.password, (error, isMatch) => {
