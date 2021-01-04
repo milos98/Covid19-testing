@@ -1,9 +1,9 @@
 <div class="container">
   <h2>Login</h2>
   <p
-    *ngIf="onSubmit()"
+    *ngIf="failed"
     class="help-block-danger rounded-corners"
-    >Username and password did not match!
+    >{{ message }}
   </p>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <div class="form-group">

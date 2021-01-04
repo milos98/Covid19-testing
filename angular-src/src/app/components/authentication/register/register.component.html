@@ -1,9 +1,14 @@
 <div class="container">
   <h2>Register</h2>
   <p
-    *ngIf="onSubmit()"
+    *ngIf="!registerForm.valid"
     class="help-block-danger rounded-corners"
     >Please enter all info!
+  </p>
+  <p
+    *ngIf="failed"
+    class="help-block-danger rounded-corners"
+  >{{ message }}
   </p>
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     <div class="form-group" formGroupName="name">
