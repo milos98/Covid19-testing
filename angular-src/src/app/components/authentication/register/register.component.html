@@ -1,9 +1,9 @@
 <div class="container">
   <h2>Register</h2>
   <p
-    *ngIf="!registerForm.valid"
+    *ngIf="!registerForm.valid && registerForm.touched"
     class="help-block-danger rounded-corners"
-    >Please enter all info!
+    >All fields are required!
   </p>
   <p
     *ngIf="failed"
