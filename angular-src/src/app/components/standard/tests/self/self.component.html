@@ -1,0 +1,82 @@
+<div class="container">
+  <h2>Self test</h2>
+  <form [formGroup]="selfTestForm" (ngSubmit)="onSubmit()">
+    <div class="form-group" formGroupName="travel">
+      <span>Did you travel in last 14 days?</span>
+      <input
+        type="radio"
+        id="yesTravel"
+        name="travel"
+        value="yes"
+        formControlName="travel"
+      ><label for="yesTravel">Yes</label> <br/>
+      <input
+        type="radio"
+        id="noTravel"
+        name="travel"
+        value="no"
+        formControlName="travel"
+      ><label for="noTravel">No</label>
+    </div>
+    <div class="form-group" formGroupName="contact">
+      <span>Have you been in physical contact with infected persons?</span>
+      <input
+        type="radio"
+        id="yesContact"
+        name="contact"
+        value="yes"
+        formControlName="contact"
+      ><label for="yesContact">Yes</label> <br/>
+      <input
+        type="radio"
+        id="noContact"
+        name="contact"
+        value="no"
+        formControlName="contact"
+      ><label for="noContact">No</label>
+    </div>
+    <div class="form-group" formGroupName="symptoms">
+      <span>Which of these symptoms do you have?</span>
+      <input
+        type="checkbox"
+        id="temperature"
+        name="temperature"
+        value="temperature"
+        formControlName="symptoms"
+      ><label for="temperature">High temperature</label> <br/>
+      <input
+        type="checkbox"
+        id="cough"
+        name="cough"
+        value="cough"
+        formControlName="symptoms"
+      ><label for="cough">Cough</label> <br/>
+      <input
+        type="checkbox"
+        id="weakness"
+        name="weakness"
+        value="weakness"
+        formControlName="symptoms"
+      ><label for="weakness">General weakness</label> <br/>
+      <input
+        type="checkbox"
+        id="smell"
+        name="smell"
+        value="smell"
+        formControlName="symptoms"
+      ><label for="smell">Loss of sense of smell</label><br/>
+      <input
+        type="checkbox"
+        id="taste"
+        name="taste"
+        value="taste"
+        formControlName="symptoms"
+      ><label for="taste">Loss/change of sense of taste</label>
+    </div>
+    <button
+      class="rounded-corners"
+      type="submit"
+      [disabled]="!selfTestForm.valid"
+    >Test now!</button>
+  </form>
+</div>

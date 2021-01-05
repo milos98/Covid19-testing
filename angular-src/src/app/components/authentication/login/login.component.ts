@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   }
 
   goToRegister(): void {
-    this.router.navigate(['/register']);
+    this.router.navigate(['/auth/register']);
   }
 
   onSubmit(): any {
@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
         if (data.success) {
           this.failed = false;
           this.authService.storeUserData(data.token, data.user);
+          this.router.navigate(['/dashboard']);
         } else {
           this.failed = true;
           this.message = data.message;

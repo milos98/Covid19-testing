@@ -1,0 +1,23 @@
+@import "../../../../scss/vars";
+
+div.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-right: 35vw;
+  padding-left: 35vw;
+  width: 100vw;
+  height: calc(100% - 4em); /*minus 4em for navbar*/
+  box-sizing: border-box;
+
+  h2 {
+    margin-top: 0;
+    margin-bottom: 1em;
+  }
+
+  button {
+    padding: 1em;
+    border-color: color(danger);
+  }
+}

@@ -1,0 +1,17 @@
+<nav>
+  <mat-icon aria-hidden="false" aria-label="Menu icon" (click)="toggleSidebar()">menu</mat-icon>
+  <h1 class="logo" routerLink="/">Covid-19</h1>
+  <ul class="nav-desktop">
+    <li routerLinkActive="active"><a routerLink="/test/pcr">PCR</a></li>
+    <li routerLinkActive="active"><a routerLink="/test/fast">Fast test</a></li>
+    <li routerLinkActive="active"><a routerLink="/test/self">Self test</a></li>
+  </ul>
+</nav>
+<div class="sidebar" [ngClass]="(activated) ? ' activated' : ''">
+  <ul class="nav-mobile">
+    <p>Available tests</p>
+    <li routerLinkActive="active"><a routerLink="/test/pcr">PCR</a></li>
+    <li routerLinkActive="active"><a routerLink="/test/fast">Fast test</a></li>
+    <li routerLinkActive="active"><a routerLink="/test/self">Self test</a></li>
+  </ul>
+</div>

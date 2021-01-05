@@ -75,16 +75,15 @@
         <option
           *ngFor="let gender of genders"
           [value]="gender"
-          >{{gender}}
+        >{{gender}}
         </option>
       </select>
-      <p>Already have an account? <span class="primary" (click)="goToLogin()">Yuo can login here</span>!</p>
+      <p>Already have an account? <span class="primary" (click)="goToLogin()">You can login here</span>!</p>
     </div>
     <button
       class="rounded-corners"
       type="submit"
       [disabled]="!registerForm.valid"
-    >Register
-    </button>
+    >Register</button>
   </form>
 </div>
