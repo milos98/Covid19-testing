@@ -1,12 +1,13 @@
 const express = require('express');
-const router = express.Router();
+const userRouter = express.Router();
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
+const Test = require('../models/test');
 const Config = require('../config/database');
 
 // Register
-router.post('/register', (req, res) => {
+userRouter.post('/register', (req, res) => {
   let newUser = new User({
     name: {
       first: req.body.name.firstName,
@@ -31,15 +32,21 @@ router.post('/register', (req, res) => {
     if (error) throw error;
 
     if (user) {
-      res.json({ success: false, message: 'User with same username already exist!' });
+      res.json({
+        success: false,
+        message: 'User with same username already exist!',
+      });
       return;
     }
 
     User.getUserByEmail(newUser.email, (error, user) => {
       if (error) throw error;
-  
+
       if (user) {
-        res.json({ success: false, message: 'User with same email already exist!' });
+        res.json({
+          success: false,
+          message: 'User with same email already exist!',
+        });
         return;
       }
 
@@ -55,7 +62,7 @@ router.post('/register', (req, res) => {
 });
 
 // Authenticate
-router.post('/authenticate', (req, res) => {
+userRouter.post('/authenticate', (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
@@ -70,24 +77,24 @@ router.post('/authenticate', (req, res) => {
       if (error) throw error;
       if (isMatch) {
         const token = jwt.sign(
-          { user },
-          Config.secret,
-          { expiresIn: '1h' } // 1 week
-        );
-
-        res.json({
-          success: true,
-          token: 'JWT ' + token,
-          user: {
+          {
             id: user._id,
             name: { ...user.name },
             email: user.email,
+            username: user.username,
             gender: user.gender,
             userType: user.Type,
             lastSeen: user.lastSeen,
             testId: [...user.testId],
             status: { ...user.status },
           },
+          Config.secret,
+          { expiresIn: 3600 } // 1 MONTH
+        );
+
+        res.json({
+          success: true,
+          token: 'Bearer ' + token,
         });
       } else {
         res.json({ success: false, message: 'Wrong password!' });
@@ -97,8 +104,22 @@ router.post('/authenticate', (req, res) => {
 });
 
 // Profile
-router.get('/profile', passport.authenticate('jwt', { session: false }), (req, res) => {
-  res.send({user:req.user});
-});
+userRouter.get('/profile/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+    userId = req.params.id;
+    Test.updateTestResults(userId);
+    Test.getAllTestByUserId(userId, (error, tests) => {
+      if (error) throw error;
 
-module.exports = router;
+      if (!tests) {
+        res.json({
+          success: false,
+          message: 'There are no tests for requested user!',
+        });
+      } else {
+        res.json({ success: true, tests: [...tests] });
+      }
+    });
+  }
+);
+
+module.exports = userRouter;
