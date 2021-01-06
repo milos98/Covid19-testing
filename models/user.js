@@ -75,6 +75,14 @@ module.exports.addUser = function (newUser, callback) {
   });
 };
 
+module.exports.addNewTest = function(userId, testId, callback) {
+  User.updateOne(
+    { _id: userId }, 
+    { $push: { testId: testId } },
+    callback
+  );
+}
+
 module.exports.comparePassword = function (inputPassword, hash, callback) {
   bcrypt.compare(inputPassword, hash, (error, isMatch) => {
     if (error) throw error;
