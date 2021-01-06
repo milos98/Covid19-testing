@@ -3,13 +3,13 @@ const ExtractJwt = require('passport-jwt').ExtractJwt;
 const User = require('../models/user');
 const config = require('../config/database');
 
+let opts = {};
+opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+opts.secretOrKey = config.secret;
+
 module.exports = function (passport) {
-  let opts = {};
-  opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('jwt');
-  opts.secretOrKey = config.secret;
-  passport.use(
-    new JwtStrategy(opts, (jwt_payload, done) => {
-      User.getUserById(jwt_payload.user._id, (error, user) => {
+  passport.use('jwt', new JwtStrategy(opts, (jwt_payload, done) => {
+      User.getUserById(jwt_payload.id, (error, user) => {
         if (error) {
           return done(error, false);
         }
